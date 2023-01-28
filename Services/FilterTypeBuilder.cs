@@ -9,7 +9,9 @@ using System.Linq.Expressions;
 
 namespace BuilderFilterDynamic.Services
 {
-    class FilterTypeBuilder<TType> : IFilterTypeBuilder<TType> where TType : class
+    class FilterTypeBuilder<TType> : 
+        IFilterTypeBuilder<TType>, 
+        IFilterTypeBuilderAndOr<TType> where TType : class
     {
         private readonly IList<IFilterTypeInterpreter<TType>> _filterTypes;
         private readonly object _filtro;
@@ -26,10 +28,17 @@ namespace BuilderFilterDynamic.Services
             return this;
         }
 
-        public IFilterTypeBuilder<TType> And(string nomeParamentro, string filterType)
+        public IFilterTypeBuilderAndOr<TType> And(string nomeParamentro, string filterType)
         {
             var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParamentro, filterType);
             _filterTypes[_filterTypes.IndexOf(_filterTypes.Last())] = _filterTypes.Last().And(ContextCofR<TType>.SelecionarFilter(filtro));
+            return this;
+        }
+
+        public IFilterTypeBuilderAndOr<TType> Or(string nomeParamentro, string filterType)
+        {
+            var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParamentro, filterType);
+            _filterTypes[_filterTypes.IndexOf(_filterTypes.Last())] = _filterTypes.Last().Or(ContextCofR<TType>.SelecionarFilter(filtro));
             return this;
         }
 

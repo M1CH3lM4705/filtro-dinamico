@@ -9,9 +9,9 @@ namespace BuilderFilterDynamic.Services
     {
         public static IFilterTypeInterpreter<TType> SelecionarFilter(FiltroItem filtroItem)
         {
-            var flyweight = new FilterFlyweight<TType>();
-            var method = flyweight.Selecionar(filtroItem.FilterType);
-            return method.Execute(filtroItem);
+            var flyweight = FilterFlyweight<TType>.Selecionar(filtroItem.FilterType);
+
+            return flyweight.Execute(filtroItem);
         }
     }
 }

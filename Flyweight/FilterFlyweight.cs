@@ -6,7 +6,12 @@ namespace BuilderFilterDynamic.Flyweight
 {
     public class FilterFlyweight<TType>
     {
-        private readonly IDictionary<string, FilterTypeBaseCofR<TType>> Get =
+        private FilterFlyweight()
+        {
+
+        }
+
+        private static readonly IDictionary<string, FilterTypeBaseCofR<TType>> Get =
             new Dictionary<string, FilterTypeBaseCofR<TType>>()
             {
                 {FilterTypeConstants.Contains, new ContainsCofR<TType>() },
@@ -19,7 +24,7 @@ namespace BuilderFilterDynamic.Flyweight
                 {FilterTypeConstants.Not, new NegadoCofR<TType>() },
             };
 
-        public FilterTypeBaseCofR<TType> Selecionar(string filterType) =>
+        public static FilterTypeBaseCofR<TType> Selecionar(string filterType) =>
             Get[filterType];
     }
 }
