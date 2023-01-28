@@ -3,6 +3,15 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Michel Matos</Authors>
+    <Description>Construir queries para consultas com expression tree</Description>
+    <PackageTags>expression tree; builder dinamyc filter;</PackageTags>
+    <PackageReleaseNotes>Versão beta.</PackageReleaseNotes>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/M1CH3lM4705/filtro-dinamico</RepositoryUrl>
+    <ApplicationIcon />
+    <StartupObject />
   </PropertyGroup>
 
 </Project>
