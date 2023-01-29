@@ -9,9 +9,8 @@ using System.Linq.Expressions;
 
 namespace BuilderFilterDynamic.Services
 {
-    class FilterTypeBuilder<TType> : 
-        IFilterTypeBuilder<TType>, 
-        IFilterTypeBuilderAndOr<TType> where TType : class
+    public class FilterTypeBuilder<TType> : 
+        IFilterTypeBuilder<TType> where TType : class
     {
         private readonly IList<IFilterTypeInterpreter<TType>> _filterTypes;
         private readonly object _filtro;
@@ -28,14 +27,14 @@ namespace BuilderFilterDynamic.Services
             return this;
         }
 
-        public IFilterTypeBuilderAndOr<TType> And(string nomeParamentro, string filterType)
+        public IFilterTypeBuilder<TType> And(string nomeParamentro, string filterType)
         {
             var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParamentro, filterType);
             _filterTypes[_filterTypes.IndexOf(_filterTypes.Last())] = _filterTypes.Last().And(ContextCofR<TType>.SelecionarFilter(filtro));
             return this;
         }
 
-        public IFilterTypeBuilderAndOr<TType> Or(string nomeParamentro, string filterType)
+        public IFilterTypeBuilder<TType> Or(string nomeParamentro, string filterType)
         {
             var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParamentro, filterType);
             _filterTypes[_filterTypes.IndexOf(_filterTypes.Last())] = _filterTypes.Last().Or(ContextCofR<TType>.SelecionarFilter(filtro));
@@ -64,6 +63,34 @@ namespace BuilderFilterDynamic.Services
             _filterTypes.Add(ContextCofR<TType>.SelecionarFilter(filtro));
             return this;
 
+        }
+
+        public IFilterTypeBuilder<TType> EhMaiorOuIgual(string nomeParametro)
+        {
+            var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParametro, "greaterThanOrEqual");
+            _filterTypes.Add(ContextCofR<TType>.SelecionarFilter(filtro));
+            return this;
+        }
+
+        public IFilterTypeBuilder<TType> EhMenorOuIgual(string nomeParametro)
+        {
+            var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParametro, "lessThanOrEqual");
+            _filterTypes.Add(ContextCofR<TType>.SelecionarFilter(filtro));
+            return this;
+        }
+
+        public IFilterTypeBuilder<TType> Negar(string nomeParametro)
+        {
+            var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParametro, "not");
+            _filterTypes.Add(ContextCofR<TType>.SelecionarFilter(filtro));
+            return this;
+        }
+
+        public IFilterTypeBuilder<TType> EhDiferente(string nomeParametro)
+        {
+            var filtro = ObjectUtils.ConverterParaFiltroItem(_filtro, nomeParametro, "notEqual");
+            _filterTypes.Add(ContextCofR<TType>.SelecionarFilter(filtro));
+            return this;
         }
 
         public Expression<Func<TType, bool>> Construir()

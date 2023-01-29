@@ -1,8 +1,4 @@
-﻿using BuilderFilterDynamic.Models;
-using System;
-using System.Linq.Expressions;
-
-namespace BuilderFilterDynamic.Intefaces
+﻿namespace BuilderFilterDynamic.Intefaces
 {
     public interface IFilterTypeBuilder<TType> : IBuild<TType> where TType : class
     {
@@ -10,7 +6,11 @@ namespace BuilderFilterDynamic.Intefaces
         IFilterTypeBuilder<TType> Contains(string nomeParametro);
         IFilterTypeBuilder<TType> EhMaior(string nomeParametro);
         IFilterTypeBuilder<TType> EhMenor(string nomeParametro);
-        IFilterTypeBuilderAndOr<TType> And(string nomeParametro, string filterType);
-        IFilterTypeBuilderAndOr<TType> Or(string nomeParametro, string filterType);
+        IFilterTypeBuilder<TType> EhMaiorOuIgual(string nomeParametro);
+        IFilterTypeBuilder<TType> EhMenorOuIgual(string nomeParametro);
+        IFilterTypeBuilder<TType> Negar(string nomeParametro);
+        IFilterTypeBuilder<TType> EhDiferente(string nomeParametro);
+        IFilterTypeBuilder<TType> And(string nomeParametro, string filterType);
+        IFilterTypeBuilder<TType> Or(string nomeParametro, string filterType);
     }
 }
