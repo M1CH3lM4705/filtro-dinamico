@@ -1,5 +1,6 @@
 ﻿using BuilderFilterDynamic.Models;
 using BuilderFilterDynamic.Services;
+using System;
 
 namespace BuilderFilterDynamic.ChainOfResponsability
 {
@@ -11,7 +12,7 @@ namespace BuilderFilterDynamic.ChainOfResponsability
             {
                 return new ContainsInterpreter<TType>(filtroItem);
             }
-            return null;
+            throw new ArgumentException(nameof(filtroItem.FilterType));
         }
     }
 }

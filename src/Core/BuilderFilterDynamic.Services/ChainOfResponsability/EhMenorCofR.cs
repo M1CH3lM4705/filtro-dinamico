@@ -4,15 +4,16 @@ using System;
 
 namespace BuilderFilterDynamic.ChainOfResponsability
 {
-    public class EqualCofR<TType> : FilterTypeBaseCofR<TType>
+    public class EhMenorCofR<TType> : FilterTypeBaseCofR<TType>
     {
         public override FilterTypeInterpreter<TType> Execute(FiltroItem filtroItem)
         {
-            if(filtroItem.FilterType == FilterTypeConstants.Equals)
+            if (filtroItem.FilterType == FilterTypeConstants.LessThan)
             {
-                return new EhIgualIntrepreter<TType>(filtroItem);
+                return new EhMenorIntrepreter<TType>(filtroItem);
             }
-            return null;
+
+            throw new ArgumentException(nameof(filtroItem.FilterType));
         }
     }
 }

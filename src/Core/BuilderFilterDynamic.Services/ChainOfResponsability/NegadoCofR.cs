@@ -10,7 +10,8 @@ namespace BuilderFilterDynamic.ChainOfResponsability
         {
             if (FilterTypeConstants.Not.Equals(filtroItem.FilterType))
                 return new Negado<TType>(filtroItem);
-            throw new ArgumentNullException(nameof(filtroItem));
+
+            throw new ArgumentException(nameof(filtroItem.FilterType));
         }
     }
 }

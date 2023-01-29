@@ -10,7 +10,8 @@ namespace BuilderFilterDynamic.ChainOfResponsability
         {
             if (FilterTypeConstants.GreaterThanOrEqual.Equals(filtroItem.FilterType))
                 return new EhMaiorOuIgual<TType>(filtroItem);
-            throw new ArgumentNullException(nameof(filtroItem));
+
+            throw new ArgumentException(nameof(filtroItem.FilterType));
         }
     }
 }

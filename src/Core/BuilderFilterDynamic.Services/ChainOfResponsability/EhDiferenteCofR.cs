@@ -10,7 +10,7 @@ namespace BuilderFilterDynamic.ChainOfResponsability
         {
             if (FilterTypeConstants.NotEqual.Equals(filtroItem.FilterType))
                 return new EhDiferente<TType>(filtroItem);
-            throw new ArgumentNullException(nameof(filtroItem));
+            throw new ArgumentNullException(nameof(filtroItem.FilterType));
         }
     }
 }

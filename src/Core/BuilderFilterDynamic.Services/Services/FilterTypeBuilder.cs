@@ -95,7 +95,7 @@ namespace BuilderFilterDynamic.Services
 
         public Expression<Func<TType, bool>> Construir()
         {
-            return _filterTypes
+            return _filterTypes?
                 .Aggregate((curr, next) => curr.And(next))
                 .Interpretar();
         }

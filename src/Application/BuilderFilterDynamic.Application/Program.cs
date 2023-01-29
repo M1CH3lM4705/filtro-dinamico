@@ -1,14 +1,13 @@
 ﻿using BuilderFilterDynamic.Services;
 using System;
 
-namespace BuilderFilterDynamic
+namespace BuilderFilterDynamic.Application
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-            var pessoa = new Pessoa { Nome = "Michel", Idade = 35, Aluno = new Aluno { Nome="Joao", Turma="A"} };
+            var pessoa = new Pessoa { Nome = "Michel", Idade = 35, Aluno = new Aluno { Nome = "Joao", Turma = "A" } };
 
             var builderFilter = new FilterTypeBuilder<Pessoa>(pessoa)
                 .EhIgual(nameof(pessoa.Nome))
@@ -19,19 +18,6 @@ namespace BuilderFilterDynamic
                 .Construir();
 
             Console.WriteLine(builderFilter);
-         }
-    }
-
-    class Pessoa
-    {
-        public string Nome { get; set; }
-        public int Idade { get; set; }
-        public Aluno Aluno { get; set; }
-    }
-
-    class Aluno
-    {
-        public string Nome { get; set; }
-        public string Turma { get; set; }
+        }
     }
 }
